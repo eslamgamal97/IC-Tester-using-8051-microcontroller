@@ -1,0 +1,84 @@
+C51 COMPILER V9.60.0.0   IC_TESTER                                                         05/19/2020 17:59:27 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE IC_TESTER
+OBJECT MODULE PLACED IN .\Objects\IC_Tester.obj
+COMPILER INVOKED BY: D:\keil8051\C51\BIN\C51.EXE IC_Tester.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\IC_Tester.lst) TABS(2) OBJECT(.\Objects\IC_Tester.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          void delay(int count);
+   3          void main(void)
+   4          { 
+   5   1        P3 = 0xFF;   //make PORT3 as input
+   6   1        P2 = 0x00;   //make PORT2 as output
+   7   1        P1 = 0x00;   //make PORT1 as output
+   8   1        while(1)
+   9   1        {
+  10   2          P2 = 0xFF;    //let PORT2 HIGH 
+  11   2          P0 = 0x01;    //let PIN0 of PORT0 HIGH (CLOCK PIN)
+  12   2          delay(300);   //delay 300 msec
+  13   2          P0 = 0x00;    //let PIN0 of PORT0 LOW (CLOCK PIN)
+  14   2          delay(300);   //delay 300 msec
+  15   2          P2 = 0x00;    //let PORT2 LOW
+  16   2          P0 = 0x03;    //let PIN0 (CLOCK) & PIN1 (PRESET ENBALE for COUNTER 4029) of PORT0 HIGH
+  17   2          delay(300);   //delay 300 msec
+  18   2          // Testing ICs
+  19   2          if(P3 == 0xFE)
+  20   2          {
+  21   3            P1 = 0x01; //7453 IC
+  22   3          }
+  23   2          else if(P3 == 0x00)
+  24   2          {
+  25   3            P1 = 0x02;  //74377 IC
+  26   3          }
+  27   2          else if(P3 == 0xC0)
+  28   2          {
+  29   3            P1 = 0x04; //74174 IC
+  30   3          }
+  31   2          else if(P3 == 0xF1 || P3 == 0xF0)
+  32   2          {
+  33   3            P1 = 0x08; //4029 IC
+  34   3          }
+  35   2          else
+  36   2          {
+  37   3            P1 = 0x00; //Unknown
+  38   3          }
+  39   2          P0 = 0x00;   //let PIN0 of PORT0 LOW (CLOCK PIN)
+  40   2          delay(300);  //delay 300 msec
+  41   2        }
+  42   1      }
+  43          
+  44          void delay(int count)
+  45          {
+  46   1        while(count != 0)
+  47   1        {
+  48   2          //delay 1 msec
+  49   2          TMOD = 0x10;  //set Timer 1
+  50   2          TL1 = 0xCD;   
+  51   2          TH1 = 0xF8;
+  52   2          TR1 = 1;
+  53   2          while(TF1 == 0);
+  54   2          TR1 = 0;
+C51 COMPILER V9.60.0.0   IC_TESTER                                                         05/19/2020 17:59:27 PAGE 2   
+
+  55   2          TF1 = 0;
+  56   2          count--;
+  57   2        }
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    127    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,31 @@
+#include "ATSTAMP.h"
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+
+int main()
+{
+	if(!OpenCom(1, 115200))
+	{
+    	exit(0);
+    }
+
+	   while(1)
+	   {
+		 if(!GetBit(2,0))
+		   for(int i =0;i<5;i++)
+			{
+				clr(P1,0);
+				Sleep(300);
+				setb(P1,0);
+			 Sleep(300);
+			}
+       }
+
+      return 0;
+}
+//---------------------------------------------------------------------------
+
+
+
+

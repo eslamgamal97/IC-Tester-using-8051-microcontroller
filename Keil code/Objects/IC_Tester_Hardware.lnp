@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\IC_Tester.obj" 
+TO ".\Objects\IC_Tester_Hardware" 
+PRINT(".\Listings\IC_Tester_Hardware.m51") RAMSIZE(256) 

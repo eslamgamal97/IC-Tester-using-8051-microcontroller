@@ -1,0 +1,30 @@
+// Checks status of push button connected to P2.0  (active low)
+// When pushed, LED connected to P1.0 flashes five times
+#include "ATSTAMP.h"
+#include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+int main()
+{
+	if(!OpenCom(3, 115200))
+	{
+		exit(0);
+	}
+	   while(1)
+	   {
+		 if(!GetBit(P2,0))
+		   for(int i =0;i<5;i++)
+			{
+				clr(P1,0);
+				Sleep(1000);
+				setb(P1,0);
+				Sleep(1000);
+			}
+	   }
+	  return 0;
+}
+
+
+
+
+
