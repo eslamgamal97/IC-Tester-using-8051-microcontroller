@@ -1,5 +1,7 @@
 # IC-Tester-using-8051-microcontroller
 
+Video Link: https://drive.google.com/file/d/1nWrUst4P8_z0VuMFpv0U1ud-mY_fyUfU/view?usp=sharing
+
 Hardware components:
 
   •	AT89S52 Microcontroller.
